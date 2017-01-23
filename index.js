@@ -77,7 +77,7 @@ app.post("/login", (req, res) => {
 
   if (user.password === password) {
     // from now on we'll identify the user by the id and the id is the only personalized value that goes into our token
-    const payload = {id: user.id};
+    const payload = {id: user.id, group: "customer"};
     const token = jwt.sign(payload, jwtOptions.secretOrKey);  //Ký vào payload sử dụng secretOrKey
     res.json({message: "ok", token: token});  //và trả về
   } else {

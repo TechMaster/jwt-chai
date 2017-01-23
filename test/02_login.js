@@ -17,7 +17,7 @@ describe("Login to get JWT token", () => {
     chai.request(server)
       .post('/login')
       .set('content-type', 'application/x-www-form-urlencoded')
-      .send({name: 'test', password: 'test'})
+      .send({name: 'test', password: 'tests'})
       .end((err, res) => {
         res.should.have.status(200);
         res.body.message.should.equal('ok');
@@ -28,7 +28,7 @@ describe("Login to get JWT token", () => {
   });
 
 
-  it("Try to get secret data at /secret", () => {
+  it("Try to get secret data at /secret", (done) => {
     chai.request(server)
       .get('/secret')
       .set('content-type', 'application/x-www-form-urlencoded')
