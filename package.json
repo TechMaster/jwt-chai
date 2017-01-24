@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha -S"
+    "test": "mocha -S -r mock-local-storage"
   },
-  "keywords": ["JWT", "chai-http"],
+  "keywords": [
+    "JWT",
+    "chai-http"
+  ],
   "author": "Trịnh Minh Cường",
   "license": "MIT",
   "dependencies": {
@@ -20,6 +23,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "chai-http": "^3.0.0"
+    "chai-http": "^3.0.0",
+    "mock-local-storage": "^1.0.2"
   }
 }

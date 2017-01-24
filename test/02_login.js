@@ -17,28 +17,31 @@ describe("Login to get JWT token", () => {
     chai.request(server)
       .post('/login')
       .set('content-type', 'application/x-www-form-urlencoded')
-      .send({name: 'test', password: 'tests'})
+      .send({name: 'test', password: 'test'})
       .end((err, res) => {
         res.should.have.status(200);
         res.body.message.should.equal('ok');
-        token = res.body.token;
-        console.log(token);  //In ra token trả về
+        //Lưu lại token cho lần truy cập sau
+        sessionStorage.token = res.body.token;
         done();
       });
   });
 
 
   it("Try to get secret data at /secret", (done) => {
-    chai.request(server)
-      .get('/secret')
-      .set('content-type', 'application/x-www-form-urlencoded')
-      .set('Authorization', 'JWT '.concat(token))
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.message.should.equal('secret');
-        console.log(res.body.data);
-        done();
-      });
+    if (sessionStorage.token) {
+      chai.request(server)
+        .get('/secret')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .set('Authorization', 'JWT '.concat(sessionStorage.token))
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.message.should.equal('secret');
+          done();
+        });
+    } else {
+      throw new Error("JWT token does not exist");
+    }
 
   });
 
