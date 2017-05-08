@@ -87,6 +87,7 @@ app.post("/login", (req, res) => {
 
 
 app.get("/secret", passport.authenticate('jwt', {session: false}), (req, res) => {
+  console.log(req.user); //Tham số từ next(null, user) được truyền vào req.user
   res.json({message: "secret", data: "Here list of CIA agents in Moscow"});
 });
 
