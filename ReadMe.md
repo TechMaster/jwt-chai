@@ -23,6 +23,8 @@ Trong file package.json phần script test sẽ như sau
 sessionStorage.token = res.body.token;
 ```
 
+## Quy trình tạo JWT Token
+![workflow](workflow.jpg)
 ## Tham khảo
 1. [Express, Passport and JSON Web Token (jwt) Authentication for Beginners](https://jonathanmh.com/express-passport-json-web-token-jwt-authentication-beginners/)
 2. [Test a Node RESTful API with Mocha and Chai](https://scotch.io/tutorials/test-a-node-restful-api-with-mocha-and-chai)

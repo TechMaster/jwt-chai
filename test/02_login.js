@@ -37,7 +37,7 @@ describe("Login to get JWT token", () => {
   });
 
 
-  it("It should return 200 when get /secret wit token", (done) => {
+  it("It should return 200 when get /secret with token", (done) => {
     if (sessionStorage.token) {
       chai.request(server)
         .get('/secret')
