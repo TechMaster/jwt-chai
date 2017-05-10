@@ -26,6 +26,26 @@ sessionStorage.token = res.body.token;
 ## Quy trình tạo JWT Token
 ![workflow](workflow.jpg)
 
+## passport.authenticate
+passport.authenticate có mấy lựa chọn cấu hình:
+1. session: false nếu không lưu thông tin đăng nhập thành công vào session, mỗi lần gọi API là stateless, client phải cung cấp JWT token. [Xem chi tiết](http://passportjs.org/docs/authenticate)
+2. failureRedirect chuyển hướng khi authenticate bất thành
+3. Nếu thành công thì có hàm ```(req, res) => {...}``` hứng
+
+```javascript
+app.get("/secret", passport.authenticate('jwt', {
+  session        : false,  
+  failureRedirect: '/loginfail'}), 
+
+(req, res) => {  
+  res.json({message: "secret", user: req.user.name, data: "Here list of CIA agents in Moscow"});
+})
+
+app.get('/loginfail', (req, res) => {
+  res.send('Fail to login')
+})
+
+```
 ## Tham khảo
 1. [Express, Passport and JSON Web Token (jwt) Authentication for Beginners](https://jonathanmh.com/express-passport-json-web-token-jwt-authentication-beginners/)
 2. [Test a Node RESTful API with Mocha and Chai](https://scotch.io/tutorials/test-a-node-restful-api-with-mocha-and-chai)

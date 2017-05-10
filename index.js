@@ -85,11 +85,17 @@ app.post("/login", (req, res) => {
   }
 });
 
+app.get("/secret", passport.authenticate('jwt', {
+  session        : false,  
+  failureRedirect: '/loginfail'}), 
 
-app.get("/secret", passport.authenticate('jwt', {session: false}), (req, res) => {
-  console.log(req.user); //Tham số từ next(null, user) được truyền vào req.user
-  res.json({message: "secret", data: "Here list of CIA agents in Moscow"});
-});
+(req, res) => {  
+  res.json({message: "secret", user: req.user.name, data: "Here list of CIA agents in Moscow"});
+})
+
+app.get('/loginfail', (req, res) => {
+  res.send('Fail to login')
+})
 
 
 // xem bài viết http://www.marcusoft.net/2015/10/eaddrinuse-when-watching-tests-with-mocha-and-supertest.html
